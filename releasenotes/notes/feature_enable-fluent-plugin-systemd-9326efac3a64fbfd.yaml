@@ -1,0 +1,9 @@
+---
+features:
+  - |
+    Implements [Enable Fluentd Plugin Systemd].
+    Adds the needed changes and configurations in order to use the
+    fluentd plugin, systemd, to read logs from /var/log/journal by
+    default.
+    `Blueprint enable-fluent-plugin-systemd
+    <https://blueprints.launchpad.net/kolla-ansible/+spec/enable-fluent-plugin-systemd>`__
