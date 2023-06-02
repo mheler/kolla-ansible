@@ -7,6 +7,10 @@ default:
   log_dir: {{ log_dir }}
   secret_key: {{ skyline_secret_key }}
   session_name: {{ skyline_session_name }}
+{% if enable_prometheus_libvirt_exporter | bool %}
+  prometheus_enable_basic_auth: false
+  prometheus_endpoint: {{ internal_protocol }}://{{ kolla_internal_fqdn | put_address_in_context('url') }}:{{ prometheus_port }}
+{% endif %}
 openstack:
 {% if skyline_base_domains_ignore | bool %}
   base_domains:
