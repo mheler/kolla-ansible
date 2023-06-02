@@ -7,6 +7,7 @@
     module_args:
       url: "{{ grafana_internal_endpoint }}/login"
       status_code: 200
+      validate_certs: false
   register: result
   until: result.get('status') == 200
   retries: 30
@@ -35,6 +36,7 @@
       body_format: json
       force_basic_auth: yes
       status_code: 200, 409
+      validate_certs: false
   register: response
   run_once: True
   changed_when: response.status == 200
@@ -55,6 +57,7 @@
       password: "{{ grafana_admin_password }}"
       force_basic_auth: yes
       status_code: 200
+      validate_certs: false
   register: grafana_response
   changed_when: grafana_response.status == 200
   run_once: true
