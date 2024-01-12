@@ -89,11 +89,15 @@ prometheus_services:
         mode: "http"
         external: false
         port: "{{ prometheus_openstack_exporter_port }}"
+        backend_http_extra:
+          - "timeout server {{ prometheus_openstack_exporter_timeout }}"
       prometheus_openstack_exporter_external:
         enabled: "{{ enable_prometheus_openstack_exporter_external | bool }}"
         mode: "http"
         external: true
         port: "{{ prometheus_openstack_exporter_port }}"
+        backend_http_extra:
+          - "timeout server {{ prometheus_openstack_exporter_timeout }}"
   prometheus-elasticsearch-exporter:
     container_name: prometheus_elasticsearch_exporter
     group: prometheus-elasticsearch-exporter
@@ -314,7 +318,7 @@ prometheus_openstack_exporter_disabled_lb: "{{ '--disable-service.load-balancer 
 prometheus_openstack_exporter_disabled_items: "{{ [prometheus_openstack_exporter_disabled_volume, prometheus_openstack_exporter_disabled_dns, prometheus_openstack_exporter_disabled_object, prometheus_openstack_exporter_disabled_lb | trim] | join(' ') | trim }}"
 
 prometheus_blackbox_exporter_cmdline_extras: ""
-prometheus_cadvisor_cmdline_extras: "--docker_only --store_container_labels=false --disable_metrics=percpu,referenced_memory,cpu_topology,resctrl,udp,advtcp,sched,hugetlb,memory_numa,tcp,process"
+prometheus_cadvisor_cmdline_extras: "--docker_only --store_container_labels=false --disable_metrics=percpu,referenced_memory,cpu_topology,resctrl,udp,advtcp,sched,hugetlb,memory_numa,tcp,process --housekeeping_interval={{ prometheus_scrape_interval }}"
 prometheus_elasticsearch_exporter_cmdline_extras: ""
 prometheus_haproxy_exporter_cmdline_extras: ""
 prometheus_memcached_exporter_cmdline_extras: ""
