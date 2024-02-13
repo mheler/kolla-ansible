@@ -60,6 +60,7 @@
     module_args:
       url: "{{ cloudkitty_elasticsearch_url }}/{{ cloudkitty_elasticsearch_index_name }}"
       status_code: 200, 404
+      validate_certs: false
   run_once: true
   delegate_to: "{{ groups['cloudkitty-api'][0] }}"
   register: cloudkitty_index
@@ -78,6 +79,7 @@
       body: |
         {}
       body_format: json
+      validate_certs: false
   run_once: True
   delegate_to: "{{ groups['cloudkitty-api'][0] }}"
   when:
