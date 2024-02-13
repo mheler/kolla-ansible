@@ -156,18 +156,18 @@ cloudkitty_influxdb_use_ssl: false
 
 cloudkitty_influxdb_name: "cloudkitty"
 
-# Set the elasticsearch index name.
-cloudkitty_elasticsearch_index_name: "cloudkitty"
+# Set the opensearch index name.
+cloudkitty_opensearch_index_name: "cloudkitty"
 
-# Set the elasticsearch host URL.
-cloudkitty_elasticsearch_url: "{{ internal_protocol }}://{{ opensearch_address }}:{{ opensearch_port }}"
+# Set the opensearch host URL.
+cloudkitty_opensearch_url: "{{ internal_protocol }}://{{ opensearch_address }}:{{ opensearch_port }}"
 
 # Path of the CA certificate to trust for HTTPS connections.
-# cloudkitty_elasticsearch_cafile: "{{ openstack_cacert }}"
+# cloudkitty_opensearch_cafile: "{{ openstack_cacert }}"
 
 # Set to true to authorize insecure HTTPS connections to Elasticsearch.
-# This means, HTTPS connections without validating the certificate used by elasticsearch
-cloudkitty_elasticsearch_insecure_connections: false
+# This means, HTTPS connections without validating the certificate used by opensearch
+cloudkitty_opensearch_insecure_connections: false
 
 ####################
 # Collector
