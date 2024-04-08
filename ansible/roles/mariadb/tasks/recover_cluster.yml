@@ -142,7 +142,7 @@
 
 - name: Set first MariaDB container as primary
   become: true
-  shell: "{{ kolla_container_engine }} exec {{ mariadb_service.container_name }} mysql -uroot -p{{ database_password }} -e \"SET GLOBAL wsrep_provider_options='pc.bootstrap=yes';\""
+  shell: "{{ kolla_container_engine }} exec {{ mariadb_service.container_name }} mysql -uroot -p{{ database_password }} -e \"SET GLOBAL wsrep_provider_pc_bootstrap='ON';\""
   no_log: True
   when:
     - bootstrap_host is defined
