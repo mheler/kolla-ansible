@@ -136,6 +136,10 @@ cron_logrotate_schedule: "daily"
 # Fluentd
 ####################
 
+# Set limits for queue size and chunk size
+fluentd_bulk_message_request_threshold: "20M"
+fluentd_buffer_chunk_limit_size: "8M"
+
 fluentd_input_openstack_services:
   - name: aodh
     enabled: "{{ enable_aodh | bool }}"
