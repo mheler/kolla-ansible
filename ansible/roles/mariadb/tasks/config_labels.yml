@@ -1,0 +1,44 @@
+---
+- name: Ensure mariadb-server image is present for label check
+  vars:
+    service_name: "mariadb"
+    service: "{{ mariadb_services[service_name] }}"
+  become: true
+  kolla_container:
+    action: "ensure_image"
+    common_options: "{{ docker_common_options }}"
+    image: "{{ service.image }}"
+
+- name: Fetch mariadb-server Docker image labels
+  vars:
+    service_name: "mariadb"
+    service: "{{ mariadb_services[service_name] }}"
+  become: true
+  docker_image_info:
+    name: "{{ service.image }}"
+  register: mariadb_labels_docker
+  when:
+    - kolla_container_engine == "docker"
+
+- name: Fetch mariadb-server Podman image labels
+  vars:
+    service_name: "mariadb"
+    service: "{{ mariadb_services[service_name] }}"
+  become: true
+  podman_image_info:
+    name: "{{ service.image }}"
+  register: mariadb_labels_podman
+  when:
+    - kolla_container_engine == "podman"
+
+- name: Set fluentd facts
+  set_fact:
+    mariadb_version: "{{ mariadb_labels_docker.images[0].Config.Labels.mariadb_version | default('10.11') }}"
+  when:
+    - kolla_container_engine == "docker"
+
+- name: Set fluentd facts
+  set_fact:
+    mariadb_version: "{{ mariadb_labels_podman.images[0].Config.Labels.mariadb_version | default('10.11') }}"
+  when:
+    - kolla_container_engine == "podman"
