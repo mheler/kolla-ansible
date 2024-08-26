@@ -54,6 +54,10 @@ innodb_buffer_pool_size = '{{ dynamic_pool_size_mb }}M'
 innodb_buffer_pool_size = '8192M'
 {% endif %}
 
+{% if mariadb_version == "11.4" %}
+plugin-wsrep-provider = ON
+{% endif %}
+
 [server]
 pid-file=/var/lib/mysql/mariadb.pid
 
