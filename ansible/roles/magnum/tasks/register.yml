@@ -36,18 +36,3 @@
       cacert: "{{ openstack_cacert }}"
       region_name: "{{ openstack_region_name }}"
   run_once: True
-
-- name: Creating Magnum trustee user role
-  become: true
-  kolla_toolbox:
-    container_engine: "{{ kolla_container_engine }}"
-    module_name: "os_user_role"
-    module_args:
-      domain: "{{ trustee_domain.domain.id }}"
-      user: "{{ magnum_trustee_domain_admin }}"
-      role: "admin"
-      auth: "{{ openstack_magnum_auth }}"
-      endpoint_type: "{{ openstack_interface }}"
-      cacert: "{{ openstack_cacert }}"
-      region_name: "{{ openstack_region_name }}"
-  run_once: True
