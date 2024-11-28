@@ -1,5 +1,0 @@
----
-fixes:
-  - |
-    Fixes mariadb backup.
-    `LP#[2080408] <https://launchpad.net/bugs/2080408>`__
