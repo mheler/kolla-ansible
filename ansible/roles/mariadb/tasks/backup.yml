@@ -2,7 +2,6 @@
 - name: Get MariaDB container facts
   become: true
   kolla_container_facts:
-    action: get_containers
     container_engine: "{{ kolla_container_engine }}"
     name:
       - "{{ mariadb_services.mariadb.container_name }}"
